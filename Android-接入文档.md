@@ -133,7 +133,7 @@ appOpenAd = BAGAppOpenAd(context, strategy).apply {
       // 平台id 可自定义
       "platform_name": "Carty",
       // 平台名称
-      "className": "com.bagsdk.mediation.carty.CartyInterstitialAdapter",
+      "className": "com.bagsdk.mediation.carty.CartyAppOpenAdapter",
       // 适配器包路径
       "placement_id": "281217152630"
       // 广告位id
@@ -143,7 +143,7 @@ appOpenAd = BAGAppOpenAd(context, strategy).apply {
       // 平台id 可自定义
       "platform_name": "Max",
       // 平台名称
-      "className": "com.bagsdk.mediation.max.MaxInterstitialAdapter",
+      "className": "com.bagsdk.mediation.max.MaxAppOpenAdapter",
       // 适配器包路径
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
@@ -228,7 +228,7 @@ interstitialAd = BAGInterstitialAd(context, strategy).apply {
 
 ```json
 {
-  "name": "bagAppOpen",
+  "name": "bagInterstitial",
   //广告位名称 可自定义
   "maxWaitTime": 5000,
   //单位：毫秒，最长加载回调等待时长 例：设置为5000毫秒，加载成功回调将在3秒后或所有平台加载结束时回调
@@ -238,7 +238,7 @@ interstitialAd = BAGInterstitialAd(context, strategy).apply {
       // 平台id 可自定义
       "platform_name": "Carty",
       // 平台名称
-      "className": "com.bagsdk.mediation.carty.CartyAppOpenAdapter",
+      "className": "com.bagsdk.mediation.carty.CartyInterstitialAdapter",
       // 适配器包路径
       "placement_id": "281217152620"
       // Carty后台广告位id
@@ -248,11 +248,11 @@ interstitialAd = BAGInterstitialAd(context, strategy).apply {
       // 平台id 可自定义
       "platform_name": "Max",
       // 平台名称
-      "className": "com.bagsdk.mediation.max.MaxAppOpenAdapter",
+      "className": "com.bagsdk.mediation.max.MaxInterstitialAdapter",
       // 适配器包路径
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
-      "placement": "maxAppOpen"
+      "placement": "maxInterstitial"
     }
   ]
 }
@@ -345,7 +345,7 @@ rewardedAd = BAGRewardedAd(context, strategy).apply {
 
 ```json
 {
-  "name": "bagAppOpen",
+  "name": "bagRewarded",
   //广告位名称 可自定义
   "maxWaitTime": 5000,
   //单位：毫秒，最长加载回调等待时长 例：设置为5000毫秒，加载成功回调将在3秒后或所有平台加载结束时回调
@@ -369,7 +369,7 @@ rewardedAd = BAGRewardedAd(context, strategy).apply {
       // 适配器包路径
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
-      "placement": "maxAppOpen"
+      "placement": "maxRewarded"
     }
   ]
 }
@@ -463,7 +463,7 @@ bannerView?.apply {
 
 ```json
 {
-  "name": "bagAppOpen",
+  "name": "bagBanner",
   //广告位名称 可自定义
   "maxWaitTime": 5000,
   //单位：毫秒，最长加载回调等待时长 例：设置为5000毫秒，加载成功回调将在3秒后或所有平台加载结束时回调
@@ -475,8 +475,10 @@ bannerView?.apply {
       // 平台名称
       "className": "com.bagsdk.mediation.carty.CartyBannerAdapter",
       // 适配器包路径
-      "placement_id": "281217152640"
+      "placement_id": "281217152640",
       // Carty后台广告位id
+      "banner_format": 0,
+      //横幅类型 0=320*50，1=320*100，2=300*250
     },
     {
       "platform_id": 1,
@@ -487,7 +489,13 @@ bannerView?.apply {
       // 适配器包路径
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
-      "placement": "maxAppOpen"
+      "placement": "maxBanner",
+      "banner_format": 0,
+      //横幅类型 0=320*50，1=320*100，2=300*250
+      "banner_width": 320,
+      //设置MAX Banner宽
+      "banner_height": 50
+      //设置MAX Banner高
     }
   ]
 }
@@ -585,7 +593,7 @@ nativeAdLoader = BAGNativeAdLoader(this, strategy).apply {
 
 ```json
 {
-  "name": "bagAppOpen",
+  "name": "bagNative",
   //广告位名称 可自定义
   "maxWaitTime": 5000,
   //单位：毫秒，最长加载回调等待时长 例：设置为5000毫秒，加载成功回调将在3秒后或所有平台加载结束时回调
@@ -609,7 +617,7 @@ nativeAdLoader = BAGNativeAdLoader(this, strategy).apply {
       // 适配器包路径
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
-      "placement": "maxAppOpen"
+      "placement": "maxNative"
     }
   ]
 }
