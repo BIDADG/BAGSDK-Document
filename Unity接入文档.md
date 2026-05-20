@@ -18,7 +18,7 @@
 
 SDK下载地址：https://github.com/BIDADG/BAGSDK-Unity
 
-- 将BAGSDK.unitypackage导入项目
+- 将 BAGSDK.unitypackage 和 BAGMaxAdapter.unitypackage 导入项目
 
 - 正常集成MAX的Unity Plugin
 
@@ -698,3 +698,14 @@ BAGSDK.Instance().SetCOPPAStatus(bool);
 ```C#
 BAGSDK.Instance().SetUserID("YOUR_USER_ID");
 ```
+
+### 八、常见问题
+#### （iOS）ISO C99 and later do not support implicit function declarations
+iOS导出Xcode项目后编译时报错
+
+![](https://github.com/BIDADG/BAGSDK-Document/blob/main/Image/ios_error1.png)
+
+解决方法如下：
+在UnitFramework 的 Build Settings 中 找到 C Language Dialect 选择 GNU17 
+
+![](https://github.com/BIDADG/BAGSDK-Document/blob/main/Image/ios_error_set1.png)
