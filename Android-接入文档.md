@@ -17,6 +17,30 @@
 
 SDK下载地址：https://github.com/BIDADG/BAGSDK-Android
 
+- 将adapter和bagsdk文件夹添加到项目中
+
+![](https://github.com/BIDADG/BAGSDK-Document/blob/main/Image/androidProject.png)
+
+- setting.gradle
+
+```groovy
+include ':bagsdk'
+include ':adapter:carty'
+include ':adapter:max'
+```
+
+- app下build.gradle添加依赖
+
+```groovy
+dependencies {
+    //.....app其他依赖
+    
+    implementation project(":bagsdk")
+    implementation project(":adapter:carty")
+    implementation project(":adapter:max")
+}
+```
+
 ### 二、初始化
 
 ```Kotlin
