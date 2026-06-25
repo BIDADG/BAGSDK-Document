@@ -18,9 +18,15 @@
 
 SDK下载地址：https://github.com/BIDADG/BAGSDK-Unity
 
-- 将 BAGSDK.unitypackage 和 BAGMaxAdapter.unitypackage 导入项目
+- 将 BAGSDK.unitypackage 导入项目
 
-- 正常集成MAX的Unity Plugin
+- 根据需要选择导入聚合平台的 Adapter：
+
+	- MAX ：BAGMaxAdapter.unitypackage
+	
+	- Admob ：BAGAdmobAdapter.unitypackage
+
+- 集成相关聚合的SDK 或 Unity Plugin
 
 ### 二、初始化
 
@@ -41,16 +47,22 @@ BAGSDK.Instance().InitSDK(infoData);
          {
              "platform_id":0,//平台ID 可自定义
              "platform_name":"Carty",
-             "className":"BAGCartyAdapter",//Adapter类名
+             "className":"AdapterClassName",//Adapter类名
              "app_id":"a203273261891579" //Carty平台的appid
              
          },
          {
              "platform_id":1,//平台ID 可自定义
              "platform_name":"Max",
-             "className":"BAGMaxAdapter",//Adapter类名
+             "className":"AdapterClassName",//Adapter类名
              "sdk_key":"05TMDQ5tZabpXQ45_UTbmEGNUtVAzSTzT6KmWQc5_CuWdzccS4DCITZoL3yIWUG3bbq60QC_d4WF28tUC4gVTF",//MAX 平台的SDKkey
              "testDevice":true,//是否开启MAX测试模式 开启时会iOS会自动将设备的IDFV添加到MAX的测试设备列表中
+             "test_ids": []//测试设备列表
+         },
+         {
+             "platform_id":2,//平台ID 可自定义
+             "platform_name":"Admob",
+             "className":"AdapterClassName",//Adapter类名
              "test_ids": []//测试设备列表
          }
      ]
@@ -104,7 +116,7 @@ BAGAppOpen.Instance().CreateAppOpen(customName, infoData);
         {
             "platform_id":0,//平台ID 可自定义
             "platform_name":"Carty",
-            "className":"BAGCartyAdapter",//Adapter类名
+            "className":"AdapterClassName",//Adapter类名
             "placement_id":"281217152630",//Carty后台的 placementid
             "ad_type":0,//广告类型（仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
@@ -112,12 +124,20 @@ BAGAppOpen.Instance().CreateAppOpen(customName, infoData);
         {
             "platform_id":1,//平台ID 可自定义
             "platform_name":"Max",
-            "className":"BAGMaxAdapter",//Adapter类名
+            "className":"AdapterClassName",//Adapter类名
             "unit_id":"YOUR_AD_UNIT_ID",//MAX后台的 unitid
             "placement":"",
             "ad_type":0,//广告类型（仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
-        }
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"AdapterClassName",//Adapter类名
+            "unit_id":"ca-app-pub-3940256099942544/5575463023",//Admob后台的 unitid
+            "ad_type":0,//广告类型（仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
+        },
     ]
 }
 ```
@@ -235,7 +255,7 @@ BAGInterstitial.Instance().CreateInterstitial(customName, infoData);
         {
             "platform_id":0,//平台ID 可自定义
             "platform_name":"Carty",
-            "className":"BAGCartyAdapter",//Adapter类名
+            "className":"AdapterClassName",//Adapter类名
             "placement_id":"281217152620",//Carty后台的 placementid
             "ad_type":2,//广告类型（仅iOS使用）
            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
@@ -243,9 +263,17 @@ BAGInterstitial.Instance().CreateInterstitial(customName, infoData);
         {
             "platform_id":1,//平台ID 可自定义
             "platform_name":"Max",
-            "className":"BAGMaxAdapter",//Adapter类名
+            "className":"AdapterClassName",//Adapter类名
             "unit_id":"YOUR_AD_UNIT_ID",//MAX后台的 unitid
             "placement":"",
+            "ad_type":2,//广告类型（仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"AdapterClassName",//Adapter类名
+            "unit_id":"ca-app-pub-3940256099942544/4411468910",//Admob后台的 unitid
             "ad_type":2,//广告类型（仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
         }
@@ -365,7 +393,7 @@ BAGRewardVideo.Instance().CreateRewardVideo(customName, infoData);
         {
             "platform_id":0,//平台ID 可自定义
             "platform_name":"Carty",
-            "className":"BAGCartyAdapter",//Adapter类名
+            "className":"AdapterClassName",//Adapter类名
             "placement_id":"281217152650",//Carty后台的 placementid
             "ad_type":4,//广告类型（仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
@@ -373,12 +401,21 @@ BAGRewardVideo.Instance().CreateRewardVideo(customName, infoData);
         {
             "platform_id":1,//平台ID 可自定义
             "platform_name":"Max",
-            "className":"BAGMaxAdapter",//Adapter类名
+            "className":"AdapterClassName",//Adapter类名
             "unit_id":"YOUR_AD_UNIT_ID",//MAX后台的 unitid
             "placement":"",
             "ad_type":4,//广告类型 （仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
-        }
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"AdapterClassName",//Adapter类名
+            "unit_id":"ca-app-pub-3940256099942544/1712485313",//Admob后台的 unitid
+            "ad_type":4,//广告类型（仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4,RewardedInterstitial = 5
+            "rewarded_interstitial":false // 是否是admob插页式激励广告（仅Android使用）
+        },
     ]
 }
 ```
@@ -503,7 +540,7 @@ BAGBanner.Instance().CreateBanner(customName, infoData, config);
         {
             "platform_id":0,//平台ID 可自定义
             "platform_name":"Carty",
-            "className":"BAGCartyAdapter",//Adapter类名
+            "className":"AdapterClassName",//Adapter类名
             "placement_id":"281217152640",//Carty后台的 placementid
             "banner_format":0,//横幅类型 0=320*50，1=320*100，2=300*250
             "banner_width":320,//设置Carty Banner宽
@@ -514,12 +551,23 @@ BAGBanner.Instance().CreateBanner(customName, infoData, config);
         {
             "platform_id":1,//平台ID 可自定义
             "platform_name":"Max",
-            "className":"BAGMaxAdapter",//Adapter类名
+            "className":"AdapterClassName",//Adapter类名
             "unit_id":"YOUR_AD_UNIT_ID",//MAX后台的 unitid
             "placement":"",
             "banner_format":0,//横幅类型 0=320*50，1=320*100，2=300*250
             "banner_width":320,//设置MAX Banner宽
             "banner_height":50,//设置MAX Banner高
+            "ad_type":1,//广告类型 （仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"AdapterClassName",//Adapter类名
+            "unit_id":"ca-app-pub-3940256099942544/2934735716",//Admob后台的 unitid
+            "banner_format":0,//横幅类型 0=320*50，1=320*100，2=300*250
+            "banner_width":320,//设置Admob Banner宽
+            "banner_height":50,//设置Admob Banner高
             "ad_type":1,//广告类型 （仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
         }
@@ -647,37 +695,50 @@ private void OnDestroy()
 #### 1. 各广告类型配置说明
 - iOS 需按下表设置 className & ad_type 两个参数
 
-|平台和类型| className | ad_type|
-|---|---|---|
-|Carty 初始化| BAGCartyAdapter | 无需设置|
-|Carty 开屏| BAGCartyAdapter | 0|
-|Carty 插屏| BAGCartyAdapter | 2|
-|Carty 激励视频| BAGCartyAdapter|4|
-|Carty 横幅| BAGCartyAdapter |1|
-|||
-|MAX 初始化| BAGMaxAdapter | 无需设置|
-|MAX 开屏| BAGMaxAdapter |0|
-|MAX 插屏| BAGMaxAdapter |2|
-|MAX 激励视频| BAGMaxAdapter |4|
-|MAX 横幅| BAGMaxAdapter |1|
+|平台和类型| className | ad_type|备注|
+|---|---|---|---|
+|Carty 初始化| BAGCartyAdapter | 无需设置||
+|Carty 开屏| BAGCartyAdapter | 0||
+|Carty 插屏| BAGCartyAdapter | 2||
+|Carty 激励视频| BAGCartyAdapter|4||
+|Carty 横幅| BAGCartyAdapter |1||
+||||
+|MAX 初始化| BAGMaxAdapter | 无需设置||
+|MAX 开屏| BAGMaxAdapter |0||
+|MAX 插屏| BAGMaxAdapter |2||
+|MAX 激励视频| BAGMaxAdapter |4||
+|MAX 横幅| BAGMaxAdapter |1||
+||||
+|Admob 初始化| BAGAdmobAdapter | 无需设置||
+|Admob 开屏| BAGAdmobAdapter |0||
+|Admob 插屏| BAGAdmobAdapter |2||
+|Admob 激励视频| BAGAdmobAdapter |4||
+|Admob 横幅| BAGAdmobAdapter |1||
+|Admob 插页式激励| BAGAdmobAdapter |5|可配置在激励视频|
+
 
 - Android 需按下表设置 className
 
-|平台和类型| className |
-|---|---|
-|Carty 初始化| com.bagsdk.mediation.carty.CartyAppOpenAdapter |
-|Carty 开屏| com.bagsdk.mediation.carty.CartyAppOpenAdapter |
-|Carty 插屏| com.bagsdk.mediation.carty.CartyInterstitialAdapter|
-|Carty 激励视频| com.bagsdk.mediation.carty.CartyRewardedAdapter|
-|Carty 横幅| com.bagsdk.mediation.carty.CartyBannerAdapter|
-||
-|MAX 初始化| com.bagsdk.mediation.max.MaxAppOpenAdapter |
-|MAX 开屏| com.bagsdk.mediation.max.MaxAppOpenAdapter|
-|MAX 插屏| com.bagsdk.mediation.max.MaxInterstitialAdapter|
-|MAX 激励视频| com.bagsdk.mediation.max.MaxRewardedAdapter|
-|MAX 横幅| com.bagsdk.mediation.max.MaxBannerAdapter|
-
-
+|平台和类型| className |备注|
+|---|---|---|
+|Carty 初始化| com.bagsdk.mediation.carty.CartyAppOpenAdapter ||
+|Carty 开屏| com.bagsdk.mediation.carty.CartyAppOpenAdapter ||
+|Carty 插屏| com.bagsdk.mediation.carty.CartyInterstitialAdapter||
+|Carty 激励视频| com.bagsdk.mediation.carty.CartyRewardedAdapter||
+|Carty 横幅| com.bagsdk.mediation.carty.CartyBannerAdapter||
+|||
+|MAX 初始化| com.bagsdk.mediation.max.MaxAppOpenAdapter ||
+|MAX 开屏| com.bagsdk.mediation.max.MaxAppOpenAdapter||
+|MAX 插屏| com.bagsdk.mediation.max.MaxInterstitialAdapter||
+|MAX 激励视频| com.bagsdk.mediation.max.MaxRewardedAdapter||
+|MAX 横幅| com.bagsdk.mediation.max.MaxBannerAdapter||
+|||
+| Admob 初始化| com.bagsdk.mediation.admob.AdMobAppOpenAdapter ||
+| Admob 开屏| com.bagsdk.mediation.admob.AdMobAppOpenAdapter ||
+| Admob 插屏| com.bagsdk.mediation.admob.AdMobInterstitialAdapter ||
+| Admob 激励视频| com.bagsdk.mediation.admob.AdMobRewardedAdapter ||
+| Admob 插页式激励|com.bagsdk.mediation.admob.AdMobRewardedAdapter | rewarded_interstitial = true|
+| Admob 横幅| com.bagsdk.mediation.admob.AdMobBannerAdapter ||
 
 #### 2. 设置 DoNotSell
 
