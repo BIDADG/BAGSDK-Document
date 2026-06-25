@@ -27,6 +27,7 @@ SDK下载地址：https://github.com/BIDADG/BAGSDK-Android
 include ':bagsdk'
 include ':adapter:carty'
 include ':adapter:max'
+include ':adapter:admob'
 ```
 
 - app下build.gradle添加依赖
@@ -38,7 +39,21 @@ dependencies {
     implementation project(":bagsdk")
     implementation project(":adapter:carty")
     implementation project(":adapter:max")
+    implementation project(":adapter:admob")
 }
+```
+
+- AndroidManifest.xml
+
+```xml
+<application>
+    
+    <!-- admob APPLICATION_ID， 若未接入admob  无需配置 -->
+    <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-xxxx" />
+
+</application>
 ```
 
 ### 二、初始化
@@ -85,6 +100,14 @@ BAGSdk.init(application, object : BAGInitListener {
       "test_ids": [
         //测试设备gaid列表
       ]
+    },
+    {
+      "platform_id": 2,
+      //平台ID 可自定义
+      "platform_name": "AdMob",
+      // 平台名称
+      "className": "com.bagsdk.mediation.admob.AdMobAppOpenAdapter"
+      // 适配器包路径
     }
   ]
 }
@@ -172,6 +195,16 @@ appOpenAd = BAGAppOpenAd(context, strategy).apply {
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
       "placement": "maxAppOpen"
+    },
+    {
+      "platform_id": 2,
+      // 平台id 可自定义
+      "platform_name": "AdMob",
+      // 平台名称
+      "className": "com.bagsdk.mediation.admob.AdMobAppOpenAdapter",
+      // 适配器包路径
+      "unit_id": "YOUR_AD_UNIT_ID",
+      // admob后台的 unitid
     }
   ]
 }
@@ -277,6 +310,16 @@ interstitialAd = BAGInterstitialAd(context, strategy).apply {
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
       "placement": "maxInterstitial"
+    },
+    {
+      "platform_id": 2,
+      // 平台id 可自定义
+      "platform_name": "AdMob",
+      // 平台名称
+      "className": "com.bagsdk.mediation.admob.AdMobInterstitialAdapter",
+      // 适配器包路径
+      "unit_id": "YOUR_AD_UNIT_ID",
+      // admob后台的 unitid
     }
   ]
 }
@@ -394,6 +437,18 @@ rewardedAd = BAGRewardedAd(context, strategy).apply {
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
       "placement": "maxRewarded"
+    },
+    {
+      "platform_id": 2,
+      // 平台id 可自定义
+      "platform_name": "AdMob",
+      // 平台名称
+      "className": "com.bagsdk.mediation.admob.AdMobRewardedAdapter",
+      // 适配器包路径
+      "unit_id": "YOUR_AD_UNIT_ID",
+      // admob后台的 unitid
+      "rewarded_interstitial": true
+      // 是否是admob插页式激励广告
     }
   ]
 }
@@ -501,7 +556,7 @@ bannerView?.apply {
       // 适配器包路径
       "placement_id": "281217152640",
       // Carty后台广告位id
-      "banner_format": 0,
+      "banner_format": 0
       //横幅类型 0=320*50，1=320*100，2=300*250
     },
     {
@@ -520,6 +575,18 @@ bannerView?.apply {
       //设置MAX Banner宽
       "banner_height": 50
       //设置MAX Banner高
+    },
+    {
+      "platform_id": 2,
+      // 平台id 可自定义
+      "platform_name": "AdMob",
+      // 平台名称
+      "className": "com.bagsdk.mediation.admob.AdMobBannerAdapter",
+      // 适配器包路径
+      "unit_id": "YOUR_AD_UNIT_ID",
+      // admob后台的 unitid
+      "banner_format": 0
+      //横幅类型 0=320*50，1=320*100，2=300*250
     }
   ]
 }
@@ -642,6 +709,16 @@ nativeAdLoader = BAGNativeAdLoader(this, strategy).apply {
       "unit_id": "YOUR_AD_UNIT_ID",
       //MAX后台的 unitid
       "placement": "maxNative"
+    },
+    {
+      "platform_id": 2,
+      // 平台id 可自定义
+      "platform_name": "AdMob",
+      // 平台名称
+      "className": "com.bagsdk.mediation.admob.AdMobNativeAdapter",
+      // 适配器包路径
+      "unit_id": "YOUR_AD_UNIT_ID"
+      // admob后台的 unitid
     }
   ]
 }
