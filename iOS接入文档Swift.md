@@ -1,6 +1,7 @@
 # iOS - 接入指南 Swift
 
-支持的聚合及平台：Carty，Max 
+支持的聚合及平台：Carty，Max, Admob
+
 支持广告类型：横幅，激励视频，插屏，开屏，原生
 
 流程说明：
@@ -17,9 +18,15 @@
 ### 一、集成SDK
 SDK下载地址：https://github.com/BIDADG/BAGSDK-iOS
 
-- 将 BidAggregator 文件夹整个添加到项目中
+- 将 BidAggregator文件夹整个添加到项目中
 
 ![](https://github.com/BIDADG/BAGSDK-Document/blob/main/Image/project.png)
+
+- **注意**：BidAggregator文件夹下的Adpater目录中是各平台的桥接代码文件。
+
+- 可根据项目需求进行删减，比如：只使用Admob聚合平台，则可以移除其他聚合平台。
+![](https://github.com/BIDADG/BAGSDK-Document/blob/main/Image/adapter.jpeg)
+
 
 - 在项目的Bridging-Header中import以下头文件
 
@@ -40,13 +47,20 @@ SDK下载地址：https://github.com/BIDADG/BAGSDK-iOS
 ![](https://github.com/BIDADG/BAGSDK-Document/blob/main/Image/swiftSet2.png)
 
 
-- 在项目中集成各平台
+- 根据实际需要在项目中集成各平台
 
-如：通过pod集成各平台的SDK
+相关平台的Pod配置：
 
 ```http
+//MAX
 pod 'AppLovinSDK'
+
+//Carty
 pod 'CartySDK'
+
+//Admob
+pod 'Google-Mobile-Ads-SDK'
+
 ```
 
 ### 二、初始化
@@ -74,6 +88,12 @@ BidAggregatorSDK.sharedInstance().start(with: data, delegate: self);
              "className":"BAGMaxAdapter",
              "sdk_key":"05TMDQ5tZabpXQ45_UTbmEGNUtVAzSTzT6KmWQc5_CuWdzccS4DCITZoL3yIWUG3bbq60QC_d4WF28tUC4gVTF",//MAX 平台的SDKkey
              "testDevice":true,//是否开启MAX测试模式 开启时会iOS会自动将设备的IDFV添加到MAX的测试设备列表中
+             "test_ids": []//测试设备列表
+         },
+         {
+             "platform_id":2,//平台ID 可自定义
+             "platform_name":"Admob",
+             "className":"BAGAdmobAdapter",
              "test_ids": []//测试设备列表
          }
      ]
@@ -128,7 +148,15 @@ openAd.revenueDelegate = self
             "placement":"",
             "ad_type":0,//广告类型（仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
-        }
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"BAGAdmobAdapter",
+            "unit_id":"ca-app-pub-3940256099942544/5575463023",//Admob后台的 unitid
+            "ad_type":0,//广告类型（仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
+        },
     ]
 }
 ```
@@ -227,6 +255,14 @@ interstitialAd.revenueDelegate = self
             "className":"BAGMaxAdapter",
             "unit_id":"YOUR_AD_UNIT_ID",//MAX后台的 unitid
             "placement":"",
+            "ad_type":2,//广告类型（仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"BAGAdmobAdapter",
+            "unit_id":"ca-app-pub-3940256099942544/4411468910",//Admob后台的 unitid
             "ad_type":2,//广告类型（仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
         }
@@ -329,7 +365,15 @@ rewardedVideoAd.revenueDelegate = self
             "placement":"",
             "ad_type":4,//广告类型 （仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
-        }
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"BAGAdmobAdapter",
+            "unit_id":"ca-app-pub-3940256099942544/1712485313",//Admob后台的 unitid
+            "ad_type":4,//广告类型（仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4,RewardedInterstitial = 5
+        },
     ]
 }
 ```
@@ -442,6 +486,17 @@ adView.addSubview(bannerAd)
             "banner_format":0,//横幅类型 0=320*50，1=320*100，2=300*250
             "banner_width":320,//设置MAX Banner宽
             "banner_height":50,//设置MAX Banner高
+            "ad_type":1,//广告类型 （仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"BAGAdmobAdapter",
+            "unit_id":"ca-app-pub-3940256099942544/2934735716",//Admob后台的 unitid
+            "banner_format":0,//横幅类型 0=320*50，1=320*100，2=300*250
+            "banner_width":320,//设置Admob Banner宽
+            "banner_height":50,//设置Admob Banner高
             "ad_type":1,//广告类型 （仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
         }
@@ -565,6 +620,17 @@ native.rootViewController = self
             "placement":"",
             "ad_type":3,//广告类型 （仅iOS使用）
             //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
+        },
+        {
+            "platform_id":2,//平台ID 可自定义
+            "platform_name":"Admob",
+            "className":"BAGAdmobAdapter",
+            "unit_id":"ca-app-pub-3940256099942544/3986624511",//Admob后台的 unitid
+            "ad_type":3,//广告类型 （仅iOS使用）
+            //AppOpen = 0，Banner = 1,Interstitial = 2,Native = 3,RewardedVideo = 4
+            "adChoicesPosition":1,
+            "requestMultipleImages":false,
+            "mediaAspectRatio":0
         }
     ]
 }
