@@ -144,8 +144,6 @@ self.open.revenueDelegate = self;
 }
 ```
 
-ad_type 
-
 
 #### 2. 加载广告
 
